@@ -1,0 +1,19 @@
+#!/bin/bash
+if [ ! -f "$@" ] && [ ! -d "$@" ]; then
+  echo 'No valid file/directory path given.'
+  echo
+  echo 'Usage: '
+  echo "./$(basename $0) pathtofile"
+  exit 0
+fi
+
+path_to_item=$(realpath "$@")
+
+#Check for dependency
+dpkg -s realpath 2>/dev/null >/dev/null || ( echo "Please install 'realpath'"; exit 1)
+domain=$(hostname -f)
+if [ -f "$@" ]; then
+	echo "$domain:$path_to_item"
+else
+	echo "$domain:$path_to_item/"
+fi
