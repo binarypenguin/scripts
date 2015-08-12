@@ -13,7 +13,7 @@ path_to_item=$(realpath "$@")
 dpkg -s realpath 2>/dev/null >/dev/null || ( echo "Please install 'realpath'"; exit 1)
 domain=$(hostname -f)
 if [ -f "$@" ]; then
-	echo "$domain:$path_to_item"
+	echo $(printf '%q' "$domain:'$path_to_item'")
 else
-	echo "$domain:$path_to_item/"
+	echo $(printf '%q' "$domain:'$path_to_item/'")
 fi
