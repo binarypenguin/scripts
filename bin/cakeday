@@ -1,0 +1,11 @@
+#!/bin/bash
+OUTPUT=$(sudo dumpe2fs $(mount | grep 'on \/ ' | awk '{print $1}') 2>/dev/null | grep 'Filesystem created:')
+
+cat << 'EOF'
+     ,,,,,
+    _|||||_
+   {~*~*~*~}
+ __{*~*~*~*}__
+`-------------`
+EOF
+echo "My cake day is: ${OUTPUT:19:${#OUTPUT}}"
