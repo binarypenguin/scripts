@@ -1,17 +1,5 @@
 #!/bin/bash
-if [ "$(id -u)" != "0" ]; then
-    echo "This script must be run as root" 1>&2
-    exit 1
-fi
-
-check_dep() {
-    type $1 >/dev/null 2>&1 || { echo >&2 "I require $1 but it's not installed.  No cake for you."; exit 1; }
-}
-
-
-check_dep dumpe2fs
-
-OUTPUT=$(dumpe2fs $(mount | grep 'on \/ ' | awk '{print $1}') 2>/dev/null | grep 'Filesystem created:')
+OUTPUT=$(ls -lact --full-time /et
 
 cat << 'EOF'
      ,,,,,
@@ -20,4 +8,5 @@ cat << 'EOF'
  __{*~*~*~*}__
 `-------------`
 EOF
-echo "My cake day is: ${OUTPUT:19:${#OUTPUT}}"
+
+echo "My cake day is: ${OUTPUT}"
