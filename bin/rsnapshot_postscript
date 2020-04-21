@@ -1,21 +1,10 @@
 #!/bin/bash
 STATUS=$( \
-echo -e ":white_check_mark: Backup complete!\n"
+echo -e "Backup complete! 👍\n"
 
 #Check disk usage for our backup directory
 echo "Current Disk Usage:"
-df -h /backup
-echo ""
-
-echo "MySQL backup count per system:"
-SYSTEMS=/backup/rsnapshots/hourly.0/*
-for SYSTEM in $SYSTEMS; do
-    MYSQL_BACKUP_DIRECTORY="$SYSTEM/home/rbackup/mysql/"
-    if [ -d "$MYSQL_BACKUP_DIRECTORY" ]; then
-        echo -e "$(basename $SYSTEM):"
-	ls "$MYSQL_BACKUP_DIRECTORY" | wc -l
-    fi
-done
+/bin/df -h /backup/rsnapshot
 )
 
 /usr/local/bin/ntfy -t 'rsnapshot' send "$STATUS"
