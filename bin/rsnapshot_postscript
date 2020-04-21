@@ -4,7 +4,7 @@ echo -e "Backup complete! 👍\n"
 
 #Check disk usage for our backup directory
 echo "Current Disk Usage:"
-/bin/df -h /backup/rsnapshot
+/bin/df -h /backup/rsnapshots
 )
 
 /usr/local/bin/ntfy -t 'rsnapshot' send "$STATUS"

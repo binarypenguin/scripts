@@ -1,0 +1,26 @@
+#!/bin/bash
+
+function help() {
+  echo 'Uses wget to mirror a web directory.'
+  echo ''
+  echo 'Usage: '
+  echo "./$(basename $0) [URL] [DIRECTORY]"
+  exit 1
+}
+
+regex='(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'
+if [[ "$1" =~ $regex ]]; then
+  URL=$1
+else
+  help
+fi
+
+if [ -d $2 ]; then
+  pushd $2
+else
+  help
+fi
+
+wget -r --no-parent --reject -nc "index.html*" $URL
+
+popd
